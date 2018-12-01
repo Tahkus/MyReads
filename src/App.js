@@ -1,8 +1,9 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelves from './components/BookShelves.js'
 import SearchBooks from './components/SearchBooks.js'
+import SearchButton from './components/SearchButton.js'
 
 class BooksApp extends React.Component {
   state = {
@@ -12,25 +13,33 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: false
+    showSearchPage: false,
+    allBooks: []
+  }
+
+  updateSearchState = (pageState) => {
+    this.setState({ showSearchPage: pageState })
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((response) => this.setState({ allBooks: response}))
   }
 
   render() {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <SearchBooks />
+          <SearchBooks showSearchPage={this.updateSearchState}/>
         ) : (
           <div className="list-books">
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
+
+            <BookShelves allBooks={this.state.allBooks}/>
+
+            <SearchButton showSearchPage={this.updateSearchState}/>
             
-            <BookShelves />
-          {/* Search Button */}
-            <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>Add a book</button>
-            </div>
           </div>
         )}
       </div>

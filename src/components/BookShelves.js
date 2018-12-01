@@ -7,6 +7,9 @@ class BookShelves extends Component {
 		return (
 		    <div className="list-books-content">
 	          <div>
+	          	{/* <Shelf /> currently reading */}
+	          	{/* <Shelf /> want to read */}
+	          	{/* <Shelf /> read */}	          	
 	            <div className="bookshelf">
 	              <h2 className="bookshelf-title">Currently Reading</h2>
 	              <div className="bookshelf-books">
