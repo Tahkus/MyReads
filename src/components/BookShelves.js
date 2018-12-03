@@ -14,9 +14,9 @@ class BookShelves extends Component {
 		return (
 		    <div className="list-books-content">
 	          <div>
-	          	<BookShelf shelfTitle='Currently Reading' books={currentBooks} /> {/* currently reading */}
-	          	<BookShelf shelfTitle='Want to Read' books={wantToRead} /> {/* want to read */}
-	          	<BookShelf shelfTitle='Already Read' books={alreadyRead} /> {/* read */}	          	
+	          	<BookShelf shelfTitle='Currently Reading' books={currentBooks} newShelf={this.props.newShelf} /> {/* currently reading */}
+	          	<BookShelf shelfTitle='Want to Read' books={wantToRead} newShelf={this.props.newShelf} /> {/* want to read */}
+	          	<BookShelf shelfTitle='Already Read' books={alreadyRead} newShelf={this.props.newShelf} /> {/* read */}	          	
 	           </div>
 	        </div>			
 		)

@@ -21,6 +21,16 @@ class BooksApp extends React.Component {
     this.setState({ showSearchPage: pageState })
   }
 
+  updateShelf = (book, shelf) => {
+    BooksAPI.update(book, shelf)
+    .then(response => {
+      book.shelf = shelf;
+      this.setState(state => ({
+        allBooks: state.allBooks.filter(b => b.id !== book.id).concat(book)
+      }));
+    });
+  }
+
   componentDidMount() {
     BooksAPI.getAll().then((response) => this.setState({ allBooks: response}))
   }
@@ -33,10 +43,10 @@ class BooksApp extends React.Component {
         ) : (
           <div className="list-books">
             <div className="list-books-title">
-              <h1>MyReads</h1>
+              <h1>My Book List</h1>
             </div>
 
-            <BookShelves allBooks={this.state.allBooks}/>
+            <BookShelves allBooks={this.state.allBooks} newShelf={this.updateShelf}/>
 
             <SearchButton showSearchPage={this.updateSearchState}/>
             

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 class BookShelf extends Component {
 
 
+
 	render() {
 
 		const books = this.props.books
@@ -18,7 +19,7 @@ class BookShelf extends Component {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
 	                        <div className="book-shelf-changer">
-	                          <select>
+	                          <select defaultValue={book.shelf} onChange={(e) => (this.props.newShelf(book, e.target.value))}>
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
