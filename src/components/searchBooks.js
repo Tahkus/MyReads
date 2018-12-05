@@ -6,7 +6,7 @@ class SearchBooks extends Component {
 
 	state: {
 		books: [],
-		query: '',
+		query: ''
 	}
 
   	componentDidMount() {
@@ -14,7 +14,7 @@ class SearchBooks extends Component {
   	}
 
   	updateQuery = (query) => {
-  		this.setState({ query: query })
+  		this.setState({ query: query.trim() })
   	}
 
   	bookSearch() {
@@ -33,6 +33,9 @@ class SearchBooks extends Component {
   	}
 
 	render() {
+		const { books } = this.state
+		let bookResults = books
+
 		return (
 			<div className="search-books">
 	          <div className="search-books-bar">
@@ -46,12 +49,37 @@ class SearchBooks extends Component {
 	                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 	                  you don't find a specific author or title. Every search is limited by search terms.
 	              */}
-	              <input type="text" placeholder="Search by title or author" onChange={(event) => this.updateQuery(event.target.value)}/>
-
+	              <input 
+	              	type="text" 
+	              	placeholder="Search by title or author" 
+	              	value={this.state.query} 
+	              	onChange={(event) => this.updateQuery(event.target.value)}
+	              />
 	            </div>
 	          </div>
 	          <div className="search-books-results">
-	            <ol className="books-grid"></ol>
+	            <ol className="books-grid">
+					{bookResults.map(book => (
+	                	<li key={book.id}>
+	                    <div className="book">
+	                      <div className="book-top">
+	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})`}}></div>
+	                        <div className="book-shelf-changer">
+	                          <select defaultValue={book.shelf} onChange={(e) => (this.props.newShelf(book, e.target.value))}>
+	                            <option value="move" disabled>Move to...</option>
+	                            <option value="currentlyReading">Currently Reading</option>
+	                            <option value="wantToRead">Want to Read</option>
+	                            <option value="read">Read</option>
+	                            <option value="none">None</option>
+	                          </select>
+	                        </div>
+	                      </div>
+	                      <div className="book-title">{book.title}</div>
+	                      <div className="book-authors">{book.authors}</div>
+	                    </div>
+	                    </li>
+                    ))}
+	            </ol>
 	          </div>
 	        </div>
 		)  
