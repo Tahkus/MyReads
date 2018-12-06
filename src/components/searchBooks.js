@@ -33,9 +33,10 @@ class SearchBooks extends Component {
   	}
 
 	render() {
+{/*
 		const { books } = this.state
 		let bookResults = books
-
+*/}
 		return (
 			<div className="search-books">
 	          <div className="search-books-bar">
@@ -52,13 +53,13 @@ class SearchBooks extends Component {
 	              <input 
 	              	type="text" 
 	              	placeholder="Search by title or author" 
-	              	value={this.state.query} 
 	              	onChange={(event) => this.updateQuery(event.target.value)}
 	              />
 	            </div>
 	          </div>
 	          <div className="search-books-results">
 	            <ol className="books-grid">
+{/*	          
 					{bookResults.map(book => (
 	                	<li key={book.id}>
 	                    <div className="book">
@@ -77,8 +78,9 @@ class SearchBooks extends Component {
 	                      <div className="book-title">{book.title}</div>
 	                      <div className="book-authors">{book.authors}</div>
 	                    </div>
-	                    </li>
+	                    </li>	          
                     ))}
+*/}                    
 	            </ol>
 	          </div>
 	        </div>
