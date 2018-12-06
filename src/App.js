@@ -44,7 +44,7 @@ class BooksApp extends React.Component {
         ) : (
           <div className="list-books">
             <div className="list-books-title">
-              <h1>My Book List</h1>
+              <h1>MyReads Book Tracker</h1>
             </div>
 
             <BookShelves allBooks={this.state.allBooks} newShelf={this.updateShelf}/>
