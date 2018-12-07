@@ -54,9 +54,6 @@ body, .app {
   position: fixed;
   right: 25px;
   bottom: 25px;
-}
-
-.open-search button {
   display: block;
   width: 50px;
   height: 50px;
@@ -69,9 +66,10 @@ body, .app {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
   outline: 0;
+
 }
 
-.open-search button:hover {
+.open-search:hover {
   background-color: #9a390b;
   cursor: pointer;
 }
