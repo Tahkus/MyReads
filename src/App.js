@@ -11,10 +11,6 @@ class BooksApp extends React.Component {
     query: ''
   }
 
-  updateSearchState = (pageState) => {
-    this.setState({ showSearchPage: pageState })
-  }
-
   updateShelf = (book, shelf) => {
     BooksAPI.update(book, shelf)
     .then(response => {
@@ -35,7 +31,6 @@ class BooksApp extends React.Component {
         <Route path='/search' render={() => (
           <SearchBooks 
             allBooks={this.state.allBooks} 
-            showSearchPage={this.updateSearchState} 
             newShelf={this.updateShelf}
           />
         )}/>
