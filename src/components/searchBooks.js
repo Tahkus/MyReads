@@ -49,10 +49,6 @@ class SearchBooks extends Component {
 	          </div>
 	          <div className="search-books-results">         
 	            <ol className="books-grid">
-
-{/* 			I have commented out the below code, as it is causing an error which does not allow the
-	            page to compile. I cannot figure out how to get this code to work without throwing the error!
-*/}
 	                {this.state.shownBooks.map(book => 
 	                	<Book key={book.id} newShelf={this.props.newShelf} book={book}/>
 	                )}
