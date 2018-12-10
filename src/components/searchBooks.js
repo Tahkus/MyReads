@@ -14,22 +14,33 @@ class SearchBooks extends Component {
   	updateQuery = (query) => {
   		this.setState({ query: query.trim() })
 
-  		if (query !== null || query !== 'undefined') {
+ 		if (query.length > 0) {
   			this.bookSearch(query)
   		} else {
   			return this.setState({ shownBooks: []})
   		}
   	}
 
-	bookSearch = (query) => {
-		if (query) {
-			BooksAPI.search(query)
-			.then((response) => this.setState({ shownBooks: response }))
-			.catch((error) => {
-				console.log('Sorry, there are no books that match your search.')
-			})
+	bookSearch(query) {
+		if (this.state.query === '') {
+			return this.setState({ shownBooks:[] })
 		} else {
-			this.setState({ shownBooks: []})
+			BooksAPI.search(query)
+			.then(response => {
+					response.forEach(b => {
+						let Book = this.props.allBooks.filter(book => book.id === b.id)
+						if (Book[0]) {
+							b.shelf = Book[0].shelf
+						} else {
+							b.shelf = 'none'
+						}
+					})
+					return this.setState({ shownBooks: response })
+			})
+			.catch(error => {
+				console.log('Sorry, no results')
+				return this.setState({ shownBooks: []})
+			})
 		}
 	}
 
@@ -42,7 +53,8 @@ class SearchBooks extends Component {
 	            <div className="search-books-input-wrapper">
 	              <input 
 	              	type="text" 
-	              	placeholder="Search by title or author" 	            
+	              	placeholder="Search by title or author"
+	              	value={this.state.query} 	            
 	              	onChange={(event) => this.updateQuery(event.target.value)}
 	              />
 	            </div>

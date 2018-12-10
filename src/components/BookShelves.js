@@ -10,7 +10,6 @@ class BookShelves extends Component {
 		const currentBooks = allBooks.filter(book => book.shelf === 'currentlyReading')
 		const wantToRead = allBooks.filter(book => book.shelf === 'wantToRead')
 		const alreadyRead = allBooks.filter(book => book.shelf === 'read')
-		console.log('here', allBooks)
 		return (
 		    <div className="list-books-content">
 	          <div>
