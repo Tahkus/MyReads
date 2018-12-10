@@ -24,11 +24,11 @@ class SearchBooks extends Component {
   		}
   	}
 
-	bookSearch(query) {
-		if (this.state.query === '') {
+	bookSearch() {
+		if (this.state.query.length === '') {
 			return this.setState({ shownBooks:[] })
 		} else {
-			BooksAPI.search(query)
+			BooksAPI.search(this.state.query)
 			.then(response => {
 					response.map(b => {
 						let Book = this.props.allBooks.filter(book => book.id === b.id)
