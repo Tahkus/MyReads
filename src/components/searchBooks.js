@@ -13,9 +13,12 @@ class SearchBooks extends Component {
 
   	updateQuery = (query) => {
   		this.setState({ query: query.trim() })
+  		this.search()
+  	}
 
- 		if (query.length > 0) {
-  			this.bookSearch(query)
+  	search() {
+  	 	if (this.state.query.length > 0) {
+  			this.bookSearch(this.state.query)
   		} else {
   			return this.setState({ shownBooks: []})
   		}
@@ -27,18 +30,17 @@ class SearchBooks extends Component {
 		} else {
 			BooksAPI.search(query)
 			.then(response => {
-					response.forEach(b => {
+					response.map(b => {
 						let Book = this.props.allBooks.filter(book => book.id === b.id)
 						if (Book[0]) {
-							b.shelf = Book[0].shelf
+							return b.shelf = Book[0].shelf
 						} else {
-							b.shelf = 'none'
+							return b.shelf = 'none'
 						}
 					})
 					return this.setState({ shownBooks: response })
 			})
 			.catch(error => {
-				console.log('Sorry, no results')
 				return this.setState({ shownBooks: []})
 			})
 		}
