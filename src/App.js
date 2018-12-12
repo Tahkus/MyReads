@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Link, Switch } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import BookShelves from './components/BookShelves.js'
@@ -28,25 +28,33 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-        <Route path='/search' render={() => (
-          <SearchBooks 
-            allBooks={this.state.allBooks} 
-            newShelf={this.updateShelf}
-          />
-        )}/>
-
-        <Route exact path='/' render={() => (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads Book Tracker</h1>
-            </div>
-            <BookShelves 
+        <Switch>
+          <Route path='/search' render={() => (
+            <SearchBooks 
               allBooks={this.state.allBooks} 
               newShelf={this.updateShelf}
             />
-            <Link className="open-search" to='/search'></Link>
-          </div>
-        )}/>
+          )}/>
+
+          <Route exact path='/' render={() => (
+            <div className="list-books">
+              <div className="list-books-title">
+                <h1>MyReads Book Tracker</h1>
+              </div>
+              <BookShelves 
+                allBooks={this.state.allBooks} 
+                newShelf={this.updateShelf}
+              />
+              <Link className="open-search" to='/search'></Link>
+            </div>
+          )}/>
+
+          <Route render={() => (
+            <div>
+              <h2>Oops! No match found for the URL entered.</h2>
+            </div>
+          )}/>
+        </Switch>
       </div>
     )
   }
