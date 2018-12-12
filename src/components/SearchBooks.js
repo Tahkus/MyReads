@@ -12,7 +12,7 @@ class SearchBooks extends Component {
 	}
 
 	updateQuery = (query) => {
-		this.setState({ query: query.trim()}, this.search)
+		this.setState({ query: query }, this.search)
 	}
 
   	search() {
@@ -27,7 +27,7 @@ class SearchBooks extends Component {
 		if (this.state.query === '') {
 			return this.setState({ shownBooks:[] })
 		} else {
-			BooksAPI.search(this.state.query)
+			BooksAPI.search(this.state.query.trim())
 			.then(response => {
 					response.map(b => {
 						let Book = this.props.allBooks.filter(book => book.id === b.id)
