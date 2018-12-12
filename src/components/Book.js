@@ -3,13 +3,14 @@ import React, { Component } from 'react'
 class Book extends Component {
 
 	render() {
-		const backgroundImage = this.props.book.imageLinks.thumbnail;
+		const backgroundImage = this.props.book.imageLinks ? 
+			this.props.book.imageLinks.thumbnail : 'https://via.placeholder.com/128x193.png/FFFFFF/808080?text=No+Image';
 		
 		return (
         	<li key={this.props.book.id}>
 	            <div className="book">
 	              <div className="book-top">
-	                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${backgroundImage}})`}}></div>
+	                <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${backgroundImage})`}}></div>
 	                <div className="book-shelf-changer">
 	                  <select defaultValue={this.props.book.shelf} onChange={(e) => (this.props.newShelf(this.props.book, e.target.value))}>
 	                    <option value="move" disabled>Move to...</option>
